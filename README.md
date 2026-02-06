@@ -19,8 +19,13 @@ CustomerID: Customer number. Nominal, a 5-digit integral number uniquely assigne
 Country: Country name. Nominal, the name of the country where each customer resides.
 
 Cluster mapping
+
 0: Occasional customers
+
 1: Lost Customers
+
 2: Champions
+
 3: Potential Loyalists
+
 4: Top Customers
