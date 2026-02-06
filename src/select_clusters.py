@@ -7,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from sklearn.metrics import silhouette_score
+import os
 
 
 def select_kclusters(file_path):
@@ -27,6 +28,9 @@ def select_kclusters(file_path):
         labels = model.fit_predict(X_scaled)
         silhouette = silhouette_score(X_scaled, labels)
         silhouette_scores.append(silhouette)
+
+    if not os.path.exists('..\\images'):
+        os.makedirs('..\\images')
 
     plt.figure()
     plt.plot(range(2, 11), inertias, marker='o')
