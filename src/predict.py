@@ -2,6 +2,13 @@ import argparse
 import joblib
 
 
+MODEL_PATH = "..\\models\\model.pkl"
+SCALER_PATH = "..\\models\\scaler.pkl"
+
+model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
+
+
 CLUSTER_NAMES = {
     0: "Occasional customers",
     1: "Lost Customers",
@@ -12,23 +19,21 @@ CLUSTER_NAMES = {
 
 
 def predict(rfm_values):
-    model = joblib.load("..\\models\\model.pkl")
-    scaler = joblib.load("..\\models\\scaler.pkl")
-
     rfm_scaled = scaler.transform([rfm_values])
-    cluster = model.predict(rfm_scaled)
-    print(f"Predicted cluster: {cluster[0]} - {CLUSTER_NAMES[cluster[0]]}")
+    cluster = model.predict(rfm_scaled)[0]
+    name = CLUSTER_NAMES[cluster]
 
-    return cluster[0], CLUSTER_NAMES[cluster[0]]
+    return cluster, name
 
 
 def main():
     parser = argparse.ArgumentParser(description="Predict RFM values")
-    parser.add_argument("--rfm_values", '-v', type=str, required=True, help="RFM values in the format 'R,M,F'")
+    parser.add_argument("--rfm_values", '-v', type=str, required=True, help="RFM values in the format 'R,F,M' (e.g., '5,10,3')")
     args = parser.parse_args()
 
-    rfm_values = list(map(int, args.rfm_values.split(",")))
-    predict(rfm_values)
+    rfm_values = list(map(float, args.rfm_values.split(",")))
+    cluster, name = predict(rfm_values)
+    print(f"Predicted cluster: {cluster} - {name}")
 
 
 if __name__ == "__main__":
