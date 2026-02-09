@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from src.predict import predict
 
 
@@ -11,9 +11,9 @@ app = FastAPI(
 
 
 class RFM(BaseModel):
-    recency: float
-    frequency: float
-    monetary_value: float
+    recency: int = Field(..., ge=0)
+    frequency: int = Field(..., ge=0)
+    monetary_value: float = Field(..., ge=0)
 
 
 class PredictionResponse(BaseModel):
@@ -26,3 +26,8 @@ def predict_customer_segment(rfm: RFM):
     rfm_values = [rfm.recency, rfm.frequency, rfm.monetary_value]
     cluster, name = predict(rfm_values)
     return PredictionResponse(cluster=cluster, name=name)
+
+
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
