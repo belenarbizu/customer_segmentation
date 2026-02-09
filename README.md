@@ -29,3 +29,10 @@ Cluster mapping
 3: Potential Loyalists
 
 4: Top Customers
+
+api usage:
+1. Install uvicorn
+2. uvicorn api.main:app --reload
+3. http://127.0.0.1:8000/docs
+4. Write RFM values
+5. You get the prediction cluster + name

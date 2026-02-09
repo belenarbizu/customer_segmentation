@@ -2,3 +2,5 @@ pandas
 seaborn
 scikit-learn
 matplotlib
+fastapi
+pydantic
