@@ -2,8 +2,8 @@ import argparse
 import joblib
 
 
-MODEL_PATH = "models\\model.pkl"
-SCALER_PATH = "models\\scaler.pkl"
+MODEL_PATH = "models/model.pkl"
+SCALER_PATH = "models/scaler.pkl"
 
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
