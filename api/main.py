@@ -3,9 +3,10 @@ from pydantic import BaseModel, Field
 from src.predict import predict
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 
 
-templates = Jinja2Templates(directory="web")
+templates = Jinja2Templates(directory="web/template")
 
 
 app = FastAPI(
@@ -13,6 +14,8 @@ app = FastAPI(
     description="Predict customer segments using RFM values and KMeans.",
     version="1.0.0"
 )
+
+app.mount("/static", StaticFiles(directory="web/static"), name="static")
 
 
 class RFM(BaseModel):
