@@ -1,9 +1,10 @@
 import argparse
 import joblib
+import os
 
-
-MODEL_PATH = "models/model.pkl"
-SCALER_PATH = "models/scaler.pkl"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+MODEL_PATH = os.path.join(BASE_DIR, "models", "model.pkl")
+SCALER_PATH = os.path.join(BASE_DIR, "models", "scaler.pkl")
 
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
