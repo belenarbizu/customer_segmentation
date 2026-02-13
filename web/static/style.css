@@ -18,14 +18,27 @@ h2 {
     text-align: center;
 }
 
-label {
-    font-weight: bold;
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
 }
 
 input {
     width: 100%;
     padding: 8px;
-    margin-top: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+input:focus {
+    border-color: #4f46e5;
 }
 
 button {
